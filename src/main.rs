@@ -90,7 +90,7 @@ fn add_register(peri_out_e: &mut Element,
             let offset = parse_u32(&elem.attributes["offset"]).unwrap();
             bitpos += offset;
         }else {
-            panic!(format!("unexpected element {} in field definition", elem.name));
+            panic!("unexpected element {} in field definition", elem.name);
         }
     }
     if bitpos > 0 {
@@ -158,7 +158,7 @@ fn analyze_periph(periph: &Element, periph_out_e: &mut Element) {
                 "CLR SET INV" => (true, true, true),
                 "CLR - -" => (true, false, false),
                 "- - -" => (false, false, false),
-                _ => panic!(format!("unexpected portals attribute: {}", portals)),
+                _ => panic!("unexpected portals attribute: {}", portals),
             };
 
             // get reset value; map unimplemented (-) or undefined (x) bits to 0
@@ -195,14 +195,14 @@ fn analyze_periph(periph: &Element, periph_out_e: &mut Element) {
                     String::from("")
                 };
             } else {
-                panic!(format!("missing peripheral for {}", name));
+                panic!("missing peripheral for {}", name);
             }
             let words: Vec<&str> = cperi.split(' ').collect();
             if let Some(word) = words.get(0) {
                 cperi = word.to_string();
             }
             if cperi.len() == 0 {
-                panic!(format!("empty peripheral info for {}", name));
+                panic!("empty peripheral info for {}", name);
             }
 
             // find first field definition
