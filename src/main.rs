@@ -191,6 +191,8 @@ fn analyze_periph(periph: &Element, periph_out_e: &mut Element) {
                     String::from("PPS")
                 }else if ms == "DOS-01475_lpwr_deep_sleep_ctrl_v2.Module" {
                     String::from("DSCTRL") // Deep Sleep Controller
+				} else if ms == "DOS-01539_icd_jtag_pb_v2.Module" {
+					String::from("_ICDCON")
                 } else {
                     String::from("")
                 };
