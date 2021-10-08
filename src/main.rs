@@ -193,6 +193,8 @@ fn analyze_periph(periph: &Element, periph_out_e: &mut Element) {
                     String::from("DSCTRL") // Deep Sleep Controller
 				} else if ms == "DOS-01539_icd_jtag_pb_v2.Module" {
 					String::from("_ICDCON")
+				} else if ms == "DOS-02823_clk_cru_upb_v2.Module" {
+					String::from("REFQ1CON")
                 } else {
                     String::from("")
                 };
