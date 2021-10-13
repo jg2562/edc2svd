@@ -146,7 +146,7 @@ fn analyze_periph(periph: &Element, periph_out_e: &mut Element) {
             // get the phys. address and map it to the KSEG1 segment
             let addr = parse_u32(&attr["_addr"]).unwrap() | 0xA000_0000;
 
-            let name = &attr["name"];
+            let name = &attr["cname"];
             assert_eq!(name, &attr["cname"]);
 
             let mut portals = String::from("- - -");
