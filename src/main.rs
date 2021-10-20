@@ -171,14 +171,10 @@ fn analyze_periph(periph: &Element, periph_out_e: &mut Element) {
             });
 
             // guess peripheral
-            let mop = match attr.get("memberofperipheral") {
-                Some(m) => if m.len() == 0 { None } else { Some(m) },
-                None => None,
-            };
             let mut cperi: String;
-            if let Some(bop) = attr.get("baseofperipheral") {
+            if let Some(bop) = attr.get("baseofperipheral").filter(|s| !s.is_empty()) {
                 cperi = bop.clone();
-            } else if let Some(m) = mop {
+            } else if let Some(m) = attr.get("memberofperipheral").filter(|s| !s.is_empty()) {
                 cperi = m.clone();
             } else if let Some(grp) = attr.get("grp") {
                 cperi = grp.clone();
@@ -189,10 +185,20 @@ fn analyze_periph(periph: &Element, periph_out_e: &mut Element) {
                            ms == "DOS-01423_RPORx.Module"
                 {
                     String::from("PPS")
-                }else if ms == "DOS-01475_lpwr_deep_sleep_ctrl_v2.Module" {
+                } else if ms == "DOS-01475_lpwr_deep_sleep_ctrl_v2.Module" {
                     String::from("DSCTRL") // Deep Sleep Controller
-				} else if let Some(cname) = attr.get("cname") {
-					cname.clone()
+                } else if ms == "DOS-01539_icd_jtag_pb_v2.Module" {
+                    String::from("_DDPSTAT")
+                } else if ms == "DOS-02823_clk_cru_upb_v2.Module" {
+                    String::from("CRU")
+                } else if ms == "DOS-01500_dma_bvci_v2.Module" {
+                    String::from("DMAC")
+                } else if ms == "DOS-02508_adc_sar_ctrl_upb_v1.Module" {
+                    String::from("ADCHS")
+                } else if ms == "DOS-EIP-00136_ssx_v1.Module" {
+                    String::from("SB")
+                } else if ms == "DOS-02831_usb_clk_rst_v2.Module" {
+                    String::from("USBCRCON")
                 } else {
                     String::from("")
                 };
